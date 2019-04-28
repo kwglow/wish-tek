@@ -72,6 +72,7 @@ achieve:
         ]
 visible:
         text: Does your wish fall in the visible or invisible dimension?
+        goto: fall
         responses:
                 I: 
                         goto: fall
@@ -97,4 +98,34 @@ locate:
         ]
 history:
         text: Do you have a prior history of wishes being fulfilled?
+        responses:
+                Y:
+                        goto: luck
+                N:
+                        goto: luck
+luck:
+        text: Do you consider yourself a lucky person?
+        responses:
+                Y:
+                        goto: lucky-breaks
+                N:
+                        goto: penny
+penny:
+        text: Have you ever found a penny on the street?
+        responses:
+                Y:
+                        goto: lucky-breaks
+                N:
+                        goto: lucky-breaks
+lucky-breaks:
+        text: How many times has pure luck given you a career break, a second chance, or a surprising new friend? (Enter a number from 0 - 1000)
+        goto: congrats
+        range:
+                min: 0
+                max: 1000
+congrats:
+        text: Congratulations, your wish is now being processed.
+               
+
+
 

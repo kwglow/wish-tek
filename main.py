@@ -27,8 +27,9 @@ def draw_title():
     """)
 
 def show_prompt(options):
-    user_input = input('[%s] ' % options)
-    return user_input
+    if options:
+        user_input = input('[%s] ' % options)
+        return user_input
 
 def show_loader(duration=.5):
     fill = '█'
@@ -44,11 +45,16 @@ def show_loader(duration=.5):
     print('\r  ', end='\r')
 
 def get_type(question):
-    t = type(question['responses'])
-    if t is list or t is dict:
-        return t
+    if 'range' in question:
+        return range
+    elif 'responses' in question:
+        t = type(question['responses'])
+        if t is list or t is dict:
+            return t
+        else:
+            raise TypeError('responses are not a valid type')
     else:
-        raise TypeError('responses are not a valid type')
+        return None
 
 def show_options(question):
     if get_type(question) is list:
@@ -58,11 +64,13 @@ def show_options(question):
             i += 1
 
 def get_options(question):
-    r = question['responses']
     if get_type(question) is list:
-        return '1 - %d' % len(r)
-    else:
-        return '/'.join(r.keys())
+        return '1 - %d' % len(question['responses'])
+    elif get_type(question) is range:
+        r = question['range']
+        return '%d - %d' % (r['min'], r['max'])
+    elif get_type(question) is dict:
+        return '/'.join(question['responses'].keys())
 
 
 def get_next(question, user_input):
@@ -71,9 +79,18 @@ def get_next(question, user_input):
     else:
         return questions[question['responses'][user_input]['goto']]
 
+def safe_int(user_input):
+    try:
+        return int(user_input)
+    except ValueError:
+        return None
+
 def input_is_valid(question, user_input):
     if get_type(question) is list:
-        return int(user_input) in range(1, len(question['responses']))
+        return safe_int(user_input) in range(1, len(question['responses']) + 1)
+    elif get_type(question) is range:
+        r = question['range']
+        return safe_int(user_input) in range(r['min'], r['max'])
     else:
         return user_input in question['responses'].keys()
 
@@ -81,6 +98,8 @@ def input_is_valid(question, user_input):
 def get_input(question):
     print('')
     print(question['text'])
+    if get_type(question) == None:
+        return
     show_options(question)
     user_input = show_prompt(get_options(question)).upper()
     show_loader(duration = random())
@@ -93,8 +112,25 @@ def get_input(question):
         print(question['respond'])
     if 'goto' in question:
         get_input(questions[question['goto']])
-    else:
+    elif 'responses' in question:
         get_input(get_next(question, user_input))
+
+def end_session():
+    print("Your wish is:")
+    show_loader(duration=2)
+    show_wish_result()
+
+    print("Your wish will now be routed to Station X. Please check in with the attendant.")
+    print("")
+    print("Fulfilling your wish is our top priority.")
+    print("")
+    print("Thank you for using WISH-TEK2000")
+    print("Sorting, processing, and distributing wishes since 1978")
+    show_loader(duration=10)
+
+
+def show_wish_result():
+    print("TBD")
 
 while(True):
     first = questions['init']
@@ -104,4 +140,6 @@ while(True):
     print(first['respond'])
 
     get_input(questions[first['goto']])
+
+    end_session()
 
