@@ -1,14 +1,30 @@
 import yaml
 from random import randint
 from time import sleep
+import subprocess
 
 DEVICE='printout.txt'
 
 WIDTH = 80
-MARGIN = 7
-COLUMN_OFFSETS = [15, 30, 50, 65]
+MARGIN = 5
+COLUMN_OFFSETS = [15, 30, 50, 70]
 PHRASE_DISTANCE = 30
-LPM = 100
+LPM = 10
+
+DEVICE_NAME = 'okidata'
+
+def printlines(lines):
+    command = chr(27) + chr(107) + 'n' + line
+    command += lines
+    # ESC } NUL (I-Prime command)
+    command += chr(27) + chr(125) + chr(0)
+    
+    print_cmd = ['lp', '-d', DEVICE_NAME, '-o', 'raw']
+    #cmd = ['echo']
+    proc = subprocess.Popen(print_cmd, stdin=subprocess.PIPE )
+    proc.stdin.write(line.encode('ASCII'))
+    proc.communicate()
+    proc.wait()
 
 
 with open('phrases.yaml', 'r') as f:
@@ -28,7 +44,7 @@ while True:
             line += ' '
 
     start = MARGIN
-    end = 80 - MARGIN
+    end = WIDTH - MARGIN
     COLUMN_OFFSETS
     if row % PHRASE_DISTANCE == 0:
         phrase = phrases[randint(0, len(phrases) - 1)]
@@ -40,6 +56,6 @@ while True:
 
         line = line[:start] + phrase + line[end:]
 
-    print(line)
+    printline(line)
     row += 1
     sleep(60 / LPM)
