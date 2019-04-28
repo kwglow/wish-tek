@@ -1,6 +1,21 @@
 import yaml
 from time import sleep
-from random import random
+from random import random, randint
+import art
+
+results = [{
+    'text': '        POSSIBLE, BUT TIME CONSUMING. PLEASE BE PATIENT.',
+    'art': art.umbrella
+}, {
+    'text': 'POSSIBLE, BUT DIFFERENT FROM WHAT YOU IMAGINE. PLEASE KEEP AN OPEN MIND.',
+    'art': art.motorcycle
+}, {
+    'text': '                      A SLAM DUNK',
+    'art': art.elephant
+}, {
+    'text': '                   A LONG SHOT',
+    'art': art.duck
+}]
 
 with open('questions.yaml','r') as f:
     questions = yaml.safe_load(f.read())
@@ -9,19 +24,19 @@ def draw_title():
     print("""
 
                            WELCOME TO THE
-    
+
     =============================================================
     |   _       __ ____ _____  __  __      ______ ______ __ __  |
     |  | |     / //  _// ___/ / / / /     /_  __// ____// //_/  |
     |  | | /| / / / /  \__ \ / /_/ /______ / /  / __/  / ,<     |
-    |  | |/ |/ /_/ /  ___/ // __  //_____// /  / /___ / /| |    | 
-    |  |__/|__//___/ /____//_/ /_/       /_/  /_____//_/ |_|    | 
-    |             ___   ____   ____   ____                      | 
-    |            |__ \ / __ \ / __ \ / __ \                     | 
-    |            __/ // / / // / / // / / /                     | 
-    |           / __// /_/ // /_/ // /_/ /                      | 
-    |          /____/\____/ \____/ \____/                       | 
-    |                                                           | 
+    |  | |/ |/ /_/ /  ___/ // __  //_____// /  / /___ / /| |    |
+    |  |__/|__//___/ /____//_/ /_/       /_/  /_____//_/ |_|    |
+    |             ___   ____   ____   ____                      |
+    |            |__ \ / __ \ / __ \ / __ \                     |
+    |            __/ // / / // / / // / / /                     |
+    |           / __// /_/ // /_/ // /_/ /                      |
+    |          /____/\____/ \____/ \____/                       |
+    |                                                           |
     =============================================================
 
     """)
@@ -79,6 +94,13 @@ def get_next(question, user_input):
     else:
         return questions[question['responses'][user_input]['goto']]
 
+def show_response(question, user_input):
+    response = question['responses'][user_input]
+    if 'respond' in response:
+        print('')
+        print(response['respond'])
+        show_loader(duration=1)
+
 def safe_int(user_input):
     try:
         return int(user_input)
@@ -104,42 +126,54 @@ def get_input(question):
     user_input = show_prompt(get_options(question)).upper()
     show_loader(duration = random())
     if not input_is_valid(question, user_input):
-        print("Your answer is not valid. Please try again.")
+        print('')
+        print('Your answer is not valid. Please try again.')
+        show_loader(duration=1)
         get_input(question)
         return
     #some questions always do the same thing
     if 'respond' in question:
+        print('')
         print(question['respond'])
     if 'goto' in question:
         get_input(questions[question['goto']])
     elif 'responses' in question:
+        show_response(question, user_input)
         get_input(get_next(question, user_input))
 
 def end_session():
-    print("Your wish is:")
-    show_loader(duration=2)
+    print('Your wish is:')
+    show_loader(duration=3)
     show_wish_result()
+    show_loader(duration=2)
 
-    print("Your wish will now be routed to Station X. Please check in with the attendant.")
-    print("")
-    print("Fulfilling your wish is our top priority.")
-    print("")
-    print("Thank you for using WISH-TEK2000")
-    print("Sorting, processing, and distributing wishes since 1978")
+    print('Your wish will now be routed to Station X. Please check in with the attendant.')
+    print('')
+    print('Fulfilling your wish is our top priority.')
+    show_loader(duration=2)
+    print('')
+    print('Thank you for using WISH-TEK2000')
+    print('Sorting, processing, and distributing wishes since 1978')
     show_loader(duration=10)
 
 
 def show_wish_result():
-    print("TBD")
+    item = results[randint(0, len(results) - 1)]
+    item['art']()
+    print('')
+    print(item['text'])
+    print('')
+    print('')
+    print("Press ENTER to continue.")
+    input('')
 
 while(True):
     first = questions['init']
     draw_title()
-    print("Press ENTER to begin")
+    print("                         Press ENTER to begin")
     input('')
     print(first['respond'])
 
     get_input(questions[first['goto']])
 
     end_session()
-

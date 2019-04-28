@@ -4,17 +4,17 @@ init:
         respond: >
                 NOTE: Confidentiality is key to secure wish fulfillment. Under no circumstances
                 should you reveal your wish to anyone. We will never ask for your name or other
-                personal data, and we will not sell your wish-related data to other companies 
+                personal data, and we will not sell your wish-related data to other companies
                 or utilize it without your consent.
 
 ready:
         text: Do you have your wish ready?
         responses:
-                Y: 
+                Y:
                         goto: identify
                 N:
                         goto: ready
-                        respond: Before proceeding, concentrate and identify your wish.  
+                        respond: Before proceeding, concentrate and identify your wish.
 identify:
         text: Have you identified your wish?
         responses:
@@ -74,7 +74,7 @@ visible:
         text: Does your wish fall in the visible or invisible dimension?
         goto: fall
         responses:
-                I: 
+                I:
                         goto: fall
                 V:
                         goto: fall
@@ -125,7 +125,3 @@ lucky-breaks:
                 max: 1000
 congrats:
         text: Congratulations, your wish is now being processed.
-               
-
-
-
