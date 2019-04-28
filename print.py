@@ -9,20 +9,25 @@ WIDTH = 80
 MARGIN = 5
 COLUMN_OFFSETS = [15, 30, 50, 70]
 PHRASE_DISTANCE = 30
-LPM = 10
+LPM = 60
 
 DEVICE_NAME = 'okidata'
 
 def printlines(lines):
-    command = chr(27) + chr(107) + 'n' + line
+    #Half speed
+    command = chr(27) + chr(115) + chr(49)
+    #NLQ
+    command = chr(27) + chr(120) + chr(49)
+
     command += lines
+    
     # ESC } NUL (I-Prime command)
     command += chr(27) + chr(125) + chr(0)
     
     print_cmd = ['lp', '-d', DEVICE_NAME, '-o', 'raw']
     #cmd = ['echo']
     proc = subprocess.Popen(print_cmd, stdin=subprocess.PIPE )
-    proc.stdin.write(line.encode('ASCII'))
+    proc.stdin.write(lines.encode('ASCII'))
     proc.communicate()
     proc.wait()
 
@@ -39,6 +44,7 @@ phrase = None
 left_align = True
 start = 0
 end = 0
+lines = ''
 while True:
     line = ''
     for i in range(0, WIDTH):
@@ -57,11 +63,14 @@ while True:
         line = line[:start] + phrase + line[end:]
     elif phrase != None and row % PHRASE_DISTANCE == 1:
         line = line[:start] + (' ' * len(phrase)) + line[end:]
+    elif phrase != None and row % PHRASE_DISTANCE == 2:
+        printlines(lines + line)
+        lines = ''
     else:
         start = MARGIN
         end = WIDTH - MARGIN
         phrase = None
 
-    printlines(line + '\r\n')
+    lines += line + '\n'
     row += 1
     sleep(60 / LPM)
