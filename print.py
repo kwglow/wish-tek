@@ -7,9 +7,9 @@ DEVICE='printout.txt'
 
 WIDTH = 80
 MARGIN = 5
-COLUMN_OFFSETS = [15, 30, 50, 70]
+COLUMN_OFFSETS = [10, 30, 50, 70]
 PHRASE_DISTANCE = 30
-LPM = 60
+LPM = 10
 
 DEVICE_NAME = 'okidata'
 
@@ -56,6 +56,7 @@ while True:
     if row % PHRASE_DISTANCE == PHRASE_DISTANCE - 1:
         phrase = phrases[randint(0, len(phrases) - 1)]
         left_align = (row + 1) % (2 * PHRASE_DISTANCE) == 0
+        phrase = phrase + '   ' if left_align else '   ' + phrase
         start = MARGIN if left_align else WIDTH - MARGIN - len(phrase)
         end = MARGIN + len(phrase) if left_align else WIDTH - MARGIN
         line = line[:start] + (' ' * len(phrase)) + line[end:]
