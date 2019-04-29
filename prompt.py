@@ -146,7 +146,7 @@ def end_session():
     show_wish_result()
     show_loader(duration=2)
 
-    print('Your wish will now be routed to Station X. Please check in with the attendant.')
+    print('Your wish will now be routed to Station 3. Please check in with the attendant.')
     print('')
     print('Fulfilling your wish is our top priority.')
     show_loader(duration=2)
