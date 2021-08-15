@@ -1,7 +1,8 @@
 import yaml
-from time import sleep
+from time import sleep, time
 from random import random, randint
 import art
+import signal
 
 results = [{
     'text': '        POSSIBLE, BUT TIME CONSUMING. PLEASE BE PATIENT.',
@@ -17,27 +18,40 @@ results = [{
     'art': art.duck
 }]
 
+#must try to quit twice in 1s to succeed
+last_interrupt = None
+def handleinterrupt(signum, frame):
+    global last_interrupt
+    if last_interrupt != None and time() - last_interrupt < 1:
+        exit()
+    else:
+        last_interrupt = time()
+
+signal.signal(signal.SIGINT, handleinterrupt)
+signal.signal(signal.SIGHUP, handleinterrupt)
+
 with open('questions.yaml','r') as f:
     questions = yaml.safe_load(f.read())
 
 def draw_title():
     print("""
 
-                           WELCOME TO THE
 
-    =============================================================
-    |   _       __ ____ _____  __  __      ______ ______ __ __  |
-    |  | |     / //  _// ___/ / / / /     /_  __// ____// //_/  |
-    |  | | /| / / / /  \__ \ / /_/ /______ / /  / __/  / ,<     |
-    |  | |/ |/ /_/ /  ___/ // __  //_____// /  / /___ / /| |    |
-    |  |__/|__//___/ /____//_/ /_/       /_/  /_____//_/ |_|    |
-    |             ___   ____   ____   ____                      |
-    |            |__ \ / __ \ / __ \ / __ \                     |
-    |            __/ // / / // / / // / / /                     |
-    |           / __// /_/ // /_/ // /_/ /                      |
-    |          /____/\____/ \____/ \____/                       |
-    |                                                           |
-    =============================================================
+                               WELCOME TO THE
+
+        =============================================================
+        |   _       __ ____ _____  __  __      ______ ______ __ __  |
+        |  | |     / //  _// ___/ / / / /     /_  __// ____// //_/  |
+        |  | | /| / / / /  \__ \ / /_/ /______ / /  /   /  / ,<     |
+        |  | |/ |/ /_/ /  ___/ // __  //_____// /  / /___ / /, |    |
+        |  |__/|__//___/ /____//_/ /_/       /_/  /_____//_/ |_|    |
+        |             ___   ____   ____   ____                      |
+        |            |__ \ / __ \ / __ \ / __ \                     |
+        |            __/ // / / // / / // / / /                     |
+        |           / __// /_/ // /_/ // /_/ /                      |
+        |          /____/\____/ \____/ \____/                       |
+        |                                                           |
+        =============================================================
 
     """)
 
@@ -47,8 +61,7 @@ def show_prompt(options):
         return user_input
 
 def show_loader(duration=.5):
-    fill = '█'
-    frames = [ "_","_","_","-","`","'","´","-","_","_","_"]
+    frames = [ "_","_","_","-","`","'","'","-","_","_","_"]
     rate = .07
     time = 0
     frame = 0
@@ -147,7 +160,7 @@ def end_session():
     show_wish_result()
     show_loader(duration=2)
 
-    print('Your wish will now be routed to Station X. Please check in with the attendant.')
+    print('Your wish will now be routed to Station 3. Please check in with the attendant.')
     print('')
     print('Fulfilling your wish is our top priority.')
     show_loader(duration=2)
@@ -164,16 +177,23 @@ def show_wish_result():
     print(item['text'])
     print('')
     print('')
-    print("Press ENTER to continue.")
+    print("    Press RETURN to continue.")
     input('')
+
 
 while(True):
     first = questions['init']
     draw_title()
-    print("                         Press ENTER to begin")
+    print('                           Press RETURN to begin')
+    print('')
+    print('')
     input('')
     print(first['respond'])
 
     get_input(questions[first['goto']])
 
     end_session()
+
+
+
+
