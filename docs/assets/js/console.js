@@ -21,7 +21,7 @@ import __main__
 BANNER = js.document.getElementById('ascii-title').textContent
 BANNER = BANNER + """
 
-                            Press ENTER to begin.
+                            Press RETURN to begin.
 """
 js.pyconsole = PyodideConsole(__main__.__dict__)
 async def await_fut(fut):

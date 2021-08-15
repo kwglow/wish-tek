@@ -95,6 +95,7 @@ def input_is_valid(question, user_input):
 def request_input(question_name):
     question = questions[question_name]
     print('')
+    print(question['text'])
     if get_type(question) == None:
         end_session()
     show_options(question)
