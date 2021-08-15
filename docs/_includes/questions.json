@@ -1,8 +1,8 @@
 {
   "init": {
-    "text": "Press Enter to begin",
+    "text": "Press RETURN to begin",
     "goto": "ready",
-    "respond": "NOTE: Confidentiality is key to secure wish fulfillment. Under no circumstances should you reveal your wish to anyone. We will never ask for your name or other personal data, and we will not sell your wish-related data to other companies or utilize it without your consent."
+    "respond": "NOTE: Confidentiality is key to secure wish fulfillment. Under no circumstances \\nshould you reveal your wish to anyone. We will never ask for your name or other \\npersonal data, and we will not sell your wish-related data to other companies or utilize it without \\nyour consent."
   },
   "ready": {
     "text": "Do you have your wish ready?",
@@ -167,7 +167,7 @@
     "goto": "end"
   },
   "end": {
-    "text": "Your wish will now be routed to Station X. Please check in with the attendant.\\nFulfilling your wish is our top priority.\\n\\nPress ENTER to start over.",
+    "text": "Your wish will now be routed to Station X. Please check in with the attendant.\\nFulfilling your wish is our top priority.\\n\\nPress RETURN to start over.",
     "respond": "Thank you for using WISH-TEK2000.\\nSorting, processing, and distributing wishes since 1978.",
     "goto": "init"
   }

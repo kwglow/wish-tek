@@ -124,7 +124,7 @@ def end_session():
     sleep(2)
     show_wish_result()
     print('')
-    print('Press Enter to continue.')
+    print('Press RETURN to continue.')
 
 
 def show_wish_result():
