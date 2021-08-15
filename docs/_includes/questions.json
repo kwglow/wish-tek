@@ -1,0 +1,175 @@
+{
+  "init": {
+    "text": "Press Enter to begin",
+    "goto": "ready",
+    "respond": "NOTE: Confidentiality is key to secure wish fulfillment. Under no circumstances should you reveal your wish to anyone. We will never ask for your name or other personal data, and we will not sell your wish-related data to other companies or utilize it without your consent."
+  },
+  "ready": {
+    "text": "Do you have your wish ready?",
+    "responses": {
+      "Y": {
+        "goto": "identify"
+      },
+      "N": {
+        "goto": "ready",
+        "respond": "Before proceeding, concentrate and identify your wish."
+      }
+    }
+  },
+  "identify": {
+    "text": "Have you identified your wish?",
+    "responses": {
+      "Y": {
+        "goto": "goto"
+      },
+      "N": {
+        "goto": "ready"
+      }
+    }
+  },
+  "goto": {
+    "text": "Is this your 'go-to' wish for birthday candles, shooting stars, tossing pennies into fountains, and other wish opportunities?",
+    "responses": {
+      "Y": {
+        "goto": "yourself",
+        "respond": "In order to efficiently route your wish, please answer the following questions."
+      },
+      "N": {
+        "goto": "yourself",
+        "respond": "In order to efficiently route your wish, please answer the following questions."
+      }
+    }
+  },
+  "yourself": {
+    "text": "Is your wish related to yourself?",
+    "responses": {
+      "Y": {
+        "goto": "categorize"
+      },
+      "N": {
+        "goto": "related"
+      }
+    }
+  },
+  "categorize": {
+    "text": "Would you categorize your wish as:",
+    "goto": "achieve",
+    "responses": [
+      "Humble",
+      "Bold",
+      "Grandiose",
+      "Ambitious",
+      "Complicated"
+    ]
+  },
+  "related": {
+    "text": "Is your wish related to:",
+    "goto": "achieve",
+    "responses": [
+      "A pet",
+      "A family member",
+      "World peace",
+      "Climate change",
+      "True love",
+      "Flights of fancy",
+      "Other"
+    ]
+  },
+  "achieve": {
+    "text": "Is your wish something you can achieve:",
+    "goto": "visible",
+    "respond": "Great job! We just need a few more details about your wish.",
+    "responses": [
+      "On your own",
+      "Only with a lot of help",
+      "It's in someone else's hands",
+      "Only through an act of god"
+    ]
+  },
+  "visible": {
+    "text": "Does your wish fall in the visible or invisible dimension?",
+    "goto": "fall",
+    "responses": {
+      "I": {
+        "goto": "fall"
+      },
+      "V": {
+        "goto": "fall"
+      }
+    }
+  },
+  "fall": {
+    "text": "If your wish were to fall, would it land on its head or its feet?",
+    "responses": {
+      "H": {
+        "goto": "locate"
+      },
+      "F": {
+        "goto": "locate"
+      }
+    }
+  },
+  "locate": {
+    "text": "If you had to locate your wish somewhere, would it be:",
+    "goto": "history",
+    "responses": [
+      "On the horizon",
+      "Just around the corner",
+      "Bottom of a hole",
+      "West of the 405",
+      "Outer Space",
+      "My wish knows no geographical constraints"
+    ]
+  },
+  "history": {
+    "text": "Do you have a prior history of wishes being fulfilled?",
+    "responses": {
+      "Y": {
+        "goto": "luck"
+      },
+      "N": {
+        "goto": "luck"
+      }
+    }
+  },
+  "luck": {
+    "text": "Do you consider yourself a lucky person?",
+    "responses": {
+      "Y": {
+        "goto": "lucky-breaks"
+      },
+      "N": {
+        "goto": "penny"
+      }
+    }
+  },
+  "penny": {
+    "text": "Have you ever found a penny on the street?",
+    "responses": {
+      "Y": {
+        "goto": "lucky-breaks"
+      },
+      "N": {
+        "goto": "lucky-breaks"
+      }
+    }
+  },
+  "lucky-breaks": {
+    "text": "How many times has pure luck given you a career break, a second chance, or a surprising new friend? (Enter a number from 0 - 1000)",
+    "goto": "congrats",
+    "range": {
+      "min": 0,
+      "max": 1000
+    }
+  },
+  "congrats": {
+    "text": "Congratulations, your wish is now being processed.",
+    "goto": "end"
+  },
+  "end": {
+    "text": "Your wish will now be routed to Station X. Please check in with the attendant.\\nFulfilling your wish is our top priority.\\n\\nPress ENTER to start over.",
+    "respond": "Thank you for using WISH-TEK2000.\\nSorting, processing, and distributing wishes since 1978.",
+    "goto": "init"
+  }
+
+}
