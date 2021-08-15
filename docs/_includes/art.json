@@ -1,0 +1,16 @@
+def motorcycle():
+    print("""
+    """)
+
+def umbrella():
+    print('''
+    ''')
+
+def elephant():
+    print('''
+    ''')
+
+def duck():
+    print('''
+
+    ''')

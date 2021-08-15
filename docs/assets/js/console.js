@@ -18,9 +18,10 @@ import js
 from pyodide import to_js
 from pyodide.console import PyodideConsole, repr_shorten, BANNER
 import __main__
-BANNER = """
-Welcome to WISH-TEK 2000
-Press ENTER to begin.
+BANNER = js.document.getElementById('ascii-title').textContent
+BANNER = BANNER + """
+
+                            Press ENTER to begin.
 """
 js.pyconsole = PyodideConsole(__main__.__dict__)
 async def await_fut(fut):

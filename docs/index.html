@@ -12,6 +12,21 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/pyodide/v0.18.0/full/pyodide.js"></script>
+    <script id="ascii-duck" type="text">
+{% include ascii/duck.txt %}
+    </script>
+    <script id="ascii-umbrella" type="text">
+{% include ascii/umbrella.txt %}
+    </script>
+    <script id="ascii-elephant" type="text">
+{% include ascii/elephant.txt %}
+    </script>
+    <script id="ascii-motorcycle" type="text">
+{% include ascii/motorcycle.txt %}
+    </script>
+    <script id="ascii-title" type="text">
+{% include ascii/title.txt %}
+    </script>
     <script id="program" type="text/python">
 {% include prompt.py %}
     </script>
@@ -23,6 +38,11 @@
         left: 0;
         right: 0;
         bottom: 0;
+      }
+      @media screen and (max-width: 480px) {
+        .terminal {
+          --size: 0.75;
+        }
       }
     </style>
   </head>

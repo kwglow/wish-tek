@@ -2,7 +2,7 @@
   "init": {
     "text": "Press RETURN to begin",
     "goto": "ready",
-    "respond": "NOTE: Confidentiality is key to secure wish fulfillment. Under no circumstances \\nshould you reveal your wish to anyone. We will never ask for your name or other \\npersonal data, and we will not sell your wish-related data to other companies or utilize it without \\nyour consent."
+    "respond": "NOTE: Confidentiality is key to secure wish fulfillment. Under no circumstances should you reveal your wish to anyone. We will never ask for your name or other personal data, and we will not sell your wish-related data to other companies or utilize it without your consent."
   },
   "ready": {
     "text": "Do you have your wish ready?",

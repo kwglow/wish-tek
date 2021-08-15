@@ -5,12 +5,16 @@ import js
 
 results = [{
     'text': '        POSSIBLE, BUT TIME CONSUMING. PLEASE BE PATIENT.',
+    'art': js.document.getElementById('ascii-umbrella').textContent
 }, {
     'text': 'POSSIBLE, BUT DIFFERENT FROM WHAT YOU IMAGINE. PLEASE KEEP AN OPEN MIND.',
+    'art': js.document.getElementById('ascii-motorcycle').textContent
 }, {
     'text': '                      A SLAM DUNK',
+    'art': js.document.getElementById('ascii-elephant').textContent
 }, {
     'text': '                   A LONG SHOT',
+    'art': js.document.getElementById('ascii-duck').textContent
 }]
 
 questions_json = """
@@ -91,7 +95,6 @@ def input_is_valid(question, user_input):
 def request_input(question_name):
     question = questions[question_name]
     print('')
-    print(question['text'])
     if get_type(question) == None:
         end_session()
     show_options(question)
@@ -131,6 +134,7 @@ def show_wish_result():
     item = results[randint(0, len(results) - 1)]
     print('')
     print(item['text'])
+    print(item['art'])
     print('')
     print('')
 
