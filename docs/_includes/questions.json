@@ -8,22 +8,11 @@
     "text": "Do you have your wish ready?",
     "responses": {
       "Y": {
-        "goto": "identify"
+        "goto": "goto"
       },
       "N": {
         "goto": "ready",
         "respond": "Before proceeding, concentrate and identify your wish."
-      }
-    }
-  },
-  "identify": {
-    "text": "Have you identified your wish?",
-    "responses": {
-      "Y": {
-        "goto": "goto"
-      },
-      "N": {
-        "goto": "ready"
       }
     }
   },

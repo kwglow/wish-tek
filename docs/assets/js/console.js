@@ -11,6 +11,7 @@ async function main() {
   let currentQuestion = "'init'";
 
   const prompt = document.getElementById('program').textContent;
+  document.getElementById('loader').remove();
   pyodide.runPython(
     `
 import sys
